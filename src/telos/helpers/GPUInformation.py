@@ -53,5 +53,3 @@ class GPUInformation:
                     value.append([addr, gpuName, flag])
 
             return value
-
-            print(devices)
