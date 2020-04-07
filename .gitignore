@@ -1,0 +1,7 @@
+# files
+*.pyc
+*.pyo
+*.egg-info
+
+# folders
+ENV
