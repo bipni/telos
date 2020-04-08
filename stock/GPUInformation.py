@@ -53,3 +53,6 @@ class GPUInformation:
                     value.append([addr, gpuName, flag])
 
             return value
+
+def run():
+    return GPUInformation.get_gpu()
