@@ -15,6 +15,12 @@ def launch():
     for arg in args:
         if arg == 'hello':
             Welcome()
+        
+        elif arg == 'server':
+            pass
+        
+        elif arg == 'ui':
+            pass
 
         else:
             beg = time.time()
