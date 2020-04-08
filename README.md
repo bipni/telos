@@ -31,11 +31,12 @@ $ pip install -e .
 
 Run `telos` -
 ```bash
-$ telos
+$ telos hello
 ```
 
 You will get the following message -
 ```bash
 Welcome to the telos World!!!
-Your Container Initialized...
 ```
+
+Congratulations... Your `telos` setup is perfectly working.
