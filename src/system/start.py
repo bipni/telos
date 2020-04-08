@@ -30,7 +30,7 @@ def launch():
                     for value in values:
                         print(value)
                 else:
-                    print("run method not defined in the package")
+                    print(f"run method not defined in the package {arg}")
             else:
                 print("Package Not Found")
 

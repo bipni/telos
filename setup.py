@@ -12,6 +12,6 @@ setup(
     license = 'MIT',
     zip_safe = False,
     entry_points = {
-        'console_scripts': [f'{app_info["name"]}=src.entry.start:main'],
+        'console_scripts': [f'{app_info["name"]}=src.system.start:main'],
     }
 )
