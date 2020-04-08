@@ -1,4 +1,4 @@
-from src.telos.Container import Container
+from src.telos.services.Container import Container
 from config.config import config
 
 def ConfigProvider(container: Container):

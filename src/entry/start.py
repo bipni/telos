@@ -1,4 +1,4 @@
-from src.telos.Container import Container
+from src.telos.services.Container import Container
 from src.telos.providers.ConfigProvider import ConfigProvider
 from src.telos.providers.EventsProvider import EventsProvider
 from src.telos.helpers.Welcome import Welcome
@@ -25,10 +25,12 @@ def launch():
                 mod = importlib.import_module(package)
 
                 if 'run' in dir(mod):
-                    value = mod.run()
-                    print(value)
+                    values = list(mod.run())
+                    
+                    for value in values:
+                        print(value)
                 else:
-                    print("run method not defined")
+                    print("run method not defined in the package")
             else:
                 print("Package Not Found")
 
