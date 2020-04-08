@@ -6,7 +6,7 @@ app_info = dict(**app())
 setup(
     name = app_info['name'],
     version = '0.0.0',
-    description = 'A framework that everybody needs.',
+    description = 'My Python Framework (Learning Purpose).',
     author = 'Mirja Wakil',
     author_email = 'bipumirja@gmail.com',
     license = 'MIT',

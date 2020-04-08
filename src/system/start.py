@@ -25,10 +25,8 @@ def launch():
                 mod = importlib.import_module(package)
 
                 if 'run' in dir(mod):
-                    values = list(mod.run())
-                    
-                    for value in values:
-                        print(value)
+                    values = mod.run()
+                    print(values)
                 else:
                     print(f"run method not defined in the package {arg}")
             else:
