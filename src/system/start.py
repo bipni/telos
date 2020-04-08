@@ -1,7 +1,6 @@
 from src.telos.services.Container import Container
-from src.telos.providers.ConfigProvider import ConfigProvider
-from src.telos.providers.EventsProvider import EventsProvider
 from src.telos.helpers.Welcome import Welcome
+from src.system.Bind import Bind
 
 import sys
 import importlib
@@ -10,9 +9,7 @@ def launch():
     args = sys.argv[1:]
 
     container = Container()
-
-    ConfigProvider(container)
-    EventsProvider(container)
+    Bind(container)
 
     for arg in args:
         if arg == 'hello':
@@ -28,11 +25,9 @@ def launch():
                     values = mod.run()
                     print(values)
                 else:
-                    print(f"run method not defined in the package {arg}")
+                    print(f"run method not defined in package {arg}")
             else:
                 print("Package Not Found")
-
-
 
 def main():
     launch()
