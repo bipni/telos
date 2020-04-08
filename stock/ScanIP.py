@@ -25,6 +25,8 @@ class ScanIP:
 
     @staticmethod
     def scan_ip():
+        print('Please wait a while...')
+
         ips = []
 
         my_ip = MyIP.get_ip().split('.')
@@ -54,5 +56,4 @@ class ScanIP:
         return ips
 
 def run():
-    print('Please wait...')
     return ScanIP.scan_ip()

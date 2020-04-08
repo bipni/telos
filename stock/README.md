@@ -1,8 +1,8 @@
 # Stock Folder
-This folder contains all the snippets, that is not the core code of `telos`. But still you can use `stock codes` in telos by importing them as a module.
+This folder contains all the snippets, that is not the core code of `telos`. But still you can use `stock codes` in `telos` by importing them as a module.
 
 ## Example
-If you want to import MyIP from `stock` in somewhere in `telos`, then we should write -
+If you want to import `MyIP` from `stock` in somewhere in `telos`, then we should write -
 ```python
 from stock.MyIP import MyIP
 ```
@@ -29,7 +29,7 @@ All the stock code should contain a `run` method, which is invoked by the `telos
 def run():
     return MyIP.get_ip()
 ```
-All the method in a class of stock should be `@staticmethod`. Here is a prototype of `stock code`.
+All the method in a class of `stock` should be `@staticmethod`. Here is a prototype of `stock code`.
 
 ```python
 class DemoClass:

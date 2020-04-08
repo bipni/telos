@@ -12,7 +12,10 @@ class Events:
         listeners = self._listener[event_name] if self._listener[event_name] else []
 
         for listener in listeners:
-            listener(self._data[event_name])
+            try:
+                listener(self._data[event_name])
+            except Exception as ex:
+                print(ex)
 
     def catch(self, event_name: str, listener: Callable[[dict], None]):
         self._listener[event_name].append(listener)
