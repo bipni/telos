@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 *.egg-info
+.env
 
 # folders
 ENV

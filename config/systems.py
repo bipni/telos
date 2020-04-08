@@ -5,6 +5,6 @@ load_dotenv(find_dotenv(usecwd = True))
 
 def systems():
     return {
-        'server': env('SERVER', 'flask'),
+        'server': env('SERVER', 'http'),
         'database': env('DATABASE', 'mongo')
     }

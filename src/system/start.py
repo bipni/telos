@@ -17,7 +17,15 @@ def launch():
             Welcome()
         
         elif arg == 'server':
-            pass
+            package = f"src.telos.start.server"
+
+            if importlib.util.find_spec(package) is not None:
+                mod = importlib.import_module(package)
+
+                if 'run' in dir(mod):
+                    mod.run(container)
+                else:
+                    print(f"run method not defined in package {arg}")
         
         elif arg == 'ui':
             pass
@@ -45,7 +53,7 @@ def launch():
     try:
         time.sleep(3600)
     except KeyboardInterrupt:
-        print('Terminated')
+        print('Telos Terminated')
 
 def main():
     launch()
