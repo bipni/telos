@@ -15,3 +15,8 @@ class HTTP:
         Handler = http.server.SimpleHTTPRequestHandler
         httpd = socketserver.TCPServer(("", self.port), Handler)
         httpd.serve_forever()
+
+def run(container: Container):
+    http = HTTP(container)
+    container.singleton('http', http)
+    http.start()

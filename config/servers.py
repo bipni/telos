@@ -8,5 +8,9 @@ def servers():
         'http': {
             'host': env('HTTP_HOST', 'localhost'),
             'port': env('HTTP_PORT', '8080')
+        },
+        'flask': {
+            'host': env('FLASK_HOST', 'localhost'),
+            'port': env('FLASK_PORT', '5000')
         }
     }
