@@ -9,7 +9,7 @@ def run(container: Container):
     server_types = config['server'].split(',')
 
     for server_type in server_types:
-        package = f"src.telos.servers.{server_type}.start"
+        package = f"src.telos.servers.{server_type}.Start"
 
         if importlib.util.find_spec(package) is not None:
             mod = importlib.import_module(package)

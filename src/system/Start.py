@@ -17,7 +17,7 @@ def launch():
             Welcome()
         
         elif arg == 'server':
-            package = f"src.telos.start.server"
+            package = f"src.telos.start.Server"
 
             if importlib.util.find_spec(package) is not None:
                 mod = importlib.import_module(package)
