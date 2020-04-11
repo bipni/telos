@@ -40,3 +40,23 @@ Welcome to the telos World!!!
 ```
 
 Congratulations... Your `telos` setup is perfectly working.
+
+## Rules and Regulations
+- All the folders name should be single word and  started with small letter.
+```
+src/telos/services
+```
+- All the files name should follow the properties of `Pascal Case`.
+```
+SomeFile.py
+```
+- All the class name should follow the properties of `Pascal Case`.
+```python
+class SomeClass:
+    pass
+```
+- All the functions name should follow the properties of `Snake Case`.
+```python
+def some_function:
+    pass
+```

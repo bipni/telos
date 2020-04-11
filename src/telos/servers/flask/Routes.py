@@ -12,6 +12,5 @@ def register_routes(container: Container):
     server = container.get('flask')
 
     routes = Routes(container)
-    container.singleton('routes', routes)
 
     server.register_routes('/', 'index', routes.index)

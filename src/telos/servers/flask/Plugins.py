@@ -8,16 +8,13 @@ def register_plugins(container: Container):
     plugins = config['plugins'].replace(' ', '').split(',')
 
     for plugin in plugins:
-        module_path = "src.telos.plugins.%s.Start" % (plugin)
+        package = "src.telos.plugins.%s.Start" % (plugin)
 
-        try:
-            module_spec = importlib.util.find_spec(module_path)
-        except Exception as e:
-            print(e)
-            continue
-
-        mod = importlib.import_module(module_path)
+        if importlib.util.find_spec(package) is not None:
+            mod = importlib.import_module(package)
 
         if 'register_routes' in dir(mod):
             mod.register_routes(container)
+        else:
+            print(f"register_routes method not defined in package {package}")
 
