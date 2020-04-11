@@ -8,7 +8,7 @@ def register_plugins(container: Container):
     plugins = config['plugins'].replace(' ', '').split(',')
 
     for plugin in plugins:
-        package = "src.telos.plugins.%s.Start" % (plugin)
+        package = "src.telos.plugins.%s.server.Start" % (plugin)
 
         if importlib.util.find_spec(package) is not None:
             mod = importlib.import_module(package)
