@@ -6,12 +6,12 @@ load_dotenv(find_dotenv(usecwd = True))
 def databases():
     return {
         'mongo': {
-            'host': env('MONGO_HOST', 'localhost'),
-            'port': env('MONGO_PORT', '27017'),
-            'name': env('MONGO_DB_NAME', 'telos')
+            'hosts': env('MONGO_HOSTS', 'localhost'),
+            'ports': env('MONGO_PORTS', '27017'),
+            'names': env('MONGO_DB_NAMES', 'telos')
         },
         'redis': {
-            'host': env('REDIS_HOST', 'localhost'),
-            'port': env('REDIS_PORT', '6379'),
+            'hosts': env('REDIS_HOSTS', 'localhost'),
+            'ports': env('REDIS_PORTS', '6379'),
         }
     }

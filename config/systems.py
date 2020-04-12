@@ -5,7 +5,7 @@ load_dotenv(find_dotenv(usecwd = True))
 
 def systems():
     return {
-        'server': env('SERVER', 'http'),
-        'database': env('DATABASE', 'mongo'),
+        'servers': env('SERVER', 'http'),
+        'databases': env('DATABASE', 'mongo'),
         'plugins': env('PLUGINS', 'passwords')
     }

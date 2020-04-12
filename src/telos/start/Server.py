@@ -6,7 +6,7 @@ import multiprocessing
 def run(container: Container):
     config = container.get('config')
 
-    server_types = config['server'].replace(' ', '').split(',')
+    server_types = config['servers'].replace(' ', '').split(',')
 
     for server_type in server_types:
         package = f"src.telos.servers.{server_type}.Start"
