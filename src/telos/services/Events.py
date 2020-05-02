@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Tuple
 from collections import defaultdict
 
 class Events:
@@ -6,16 +6,13 @@ class Events:
         self._data = {}
         self._listener = defaultdict(list)
     
-    def fire(self, event_name: str, data: dict):
-        self._data[event_name] = data
+    def fire(self, event_name: str, event_data: Tuple):
+        self._data[event_name] = event_data
         
         listeners = self._listener[event_name] if self._listener[event_name] else []
 
         for listener in listeners:
-            try:
-                listener(self._data[event_name])
-            except Exception as ex:
-                print(ex)
+            listener(*self._data[event_name])
 
-    def catch(self, event_name: str, listener: Callable[[dict], None]):
+    def catch(self, event_name: str, listener: Callable):
         self._listener[event_name].append(listener)

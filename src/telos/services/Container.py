@@ -14,7 +14,7 @@ class Container:
 
                 return self._container_dict[obj]
             else:
-                for key, value in self._container_dict.items():
+                for value in self._container_dict.values():
                     if isinstance(value, obj):
                         return value
                 else:
