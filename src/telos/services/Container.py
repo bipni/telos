@@ -1,11 +1,13 @@
+from typing import Dict, Union, Any, Callable
+
 class Container:
     class __Container:
         _container_dict = {}
 
-        def singleton(self, key, value):
+        def singleton(self, key: str, value: Callable):
             self._container_dict[key] = value
 
-        def get(self, obj):
+        def get(self, obj: Union[str, Any]):
             if isinstance(obj, str):
                 if obj not in self._container_dict:
                     return None
@@ -24,5 +26,5 @@ class Container:
         if not Container.instance:
             Container.instance = Container.__Container()
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: Union[str, Any]):
         return getattr(Container.instance, name)
