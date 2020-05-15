@@ -2,7 +2,7 @@ import os
 import re
 import platform
 
-class GPUInformation:
+class GPUInfo:
 
     @staticmethod
     def get_gpu():
@@ -55,4 +55,4 @@ class GPUInformation:
             return value
 
 def run():
-    return GPUInformation.get_gpu()
+    return GPUInfo.get_gpu()
