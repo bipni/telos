@@ -7,8 +7,7 @@ def databases():
     return {
         'mongo': {
             'hosts': env('MONGO_HOSTS', 'localhost'),
-            'ports': env('MONGO_PORTS', '27017'),
-            'names': env('MONGO_DB_NAMES', 'telos')
+            'ports': env('MONGO_PORTS', '27017')
         },
         'redis': {
             'hosts': env('REDIS_HOSTS', 'localhost'),

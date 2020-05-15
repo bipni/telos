@@ -55,7 +55,7 @@ SomeFile.py
 class SomeClass:
     pass
 ```
-- All the functions name should follow the properties of `Snake Case`.
+- All the functions name should follow the properties of `Snake Case` except Provider Functions (Provider Functions name should follow the properties of `Pascal Case`).
 ```python
 def some_function:
     pass
