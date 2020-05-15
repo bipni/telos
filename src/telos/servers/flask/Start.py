@@ -5,6 +5,7 @@ from src.telos.servers.flask.Plugins import register_plugins
 from typing import Callable
 from flask import Flask
 from flask_cors import CORS
+from waitress import serve
 
 class FLASK:
     def __init__(self, container: Container):
@@ -19,8 +20,8 @@ class FLASK:
         self.app.add_url_rule(endpoint, name, handler, methods = methods)
     
     def start(self):
-        print("Flask Server Started at Host: %s and Port: %s" % (self.host, self.port))
-        self.app.run(self.host, self.port)
+        print("Flask Server ", end='')
+        serve(self.app, host=self.host, port=self.port)
 
 def run(container: Container):
     flask = FLASK(container)
