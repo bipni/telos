@@ -8,6 +8,6 @@ def MongoProvider(container: Container):
     ports = config['ports'].replace(' ', '').split(',')
 
     if len(hosts) == len(ports):
-        Mongo(hosts, ports)
+        container.singleton('mongo', Mongo(hosts, ports))
     else:
         raise Exception('Mongo DB Hosts and Ports Mismatch')
