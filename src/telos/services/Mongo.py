@@ -7,8 +7,6 @@ class Mongo:
         for i in range(len(hosts)):
             self._clients[f'{hosts[i]}:{ports[i]}'] = MongoClient(hosts[i], int(ports[i]))
 
-        print(self._clients)
-
     def get_client(self, client: str):
         if client in self._clients:
             return self._clients[client]

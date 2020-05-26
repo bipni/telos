@@ -1,6 +1,4 @@
-from src.telos.services.Container import Container
 from src.telos.helpers.Welcome import Welcome
-from src.system.Bind import Bind
 
 import sys
 import importlib
@@ -8,9 +6,6 @@ import time
 
 def launch():
     args = sys.argv[1:]
-
-    container = Container()
-    Bind(container)
 
     for arg in args:
         if arg == 'hello':
@@ -23,7 +18,7 @@ def launch():
                 mod = importlib.import_module(package)
 
                 if 'run' in dir(mod):
-                    mod.run(container)
+                    mod.run()
                 else:
                     print(f"run method not defined in package {arg}")
         
