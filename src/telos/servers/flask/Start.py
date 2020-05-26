@@ -24,10 +24,10 @@ class FlaskServer:
         serve(self.app, host=self.host, port=self.port)
 
 def run(container: Container):
-    flask = FlaskServer(container)
-    container.singleton('flask', flask)
+    flask_server = FlaskServer(container)
+    container.singleton('flask', flask_server)
 
     register_routes(container)
     register_plugins(container)
 
-    flask.start()
+    flask_server.start()

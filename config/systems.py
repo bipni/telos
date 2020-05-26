@@ -7,5 +7,5 @@ def systems():
     return {
         'servers': env('SERVERS', 'http'),
         'databases': env('DATABASES', 'mongo'),
-        'plugins': env('PLUGINS', 'authentication')
+        'plugins': env('PLUGINS', 'password')
     }

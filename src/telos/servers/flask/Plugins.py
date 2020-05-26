@@ -18,3 +18,8 @@ def register_plugins(container: Container):
         else:
             print(f"register_routes method not defined in package {package}")
 
+        if 'register_events' in dir(mod):
+            mod.register_events(container)
+        else:
+            print(f"register_events method not defined in package {package}")
+
