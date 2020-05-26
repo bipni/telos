@@ -13,13 +13,18 @@ def register_plugins(container: Container):
         if importlib.util.find_spec(package) is not None:
             mod = importlib.import_module(package)
 
-        if 'register_routes' in dir(mod):
-            mod.register_routes(container)
+        if 'register_repositories' in dir(mod):
+            mod.register_repositories(container)
         else:
-            print(f"register_routes method not defined in package {package}")
+            print(f"register_events method not defined in package {package}")
 
         if 'register_events' in dir(mod):
             mod.register_events(container)
         else:
             print(f"register_events method not defined in package {package}")
+
+        if 'register_routes' in dir(mod):
+            mod.register_routes(container)
+        else:
+            print(f"register_routes method not defined in package {package}")
 
