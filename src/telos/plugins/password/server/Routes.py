@@ -1,6 +1,7 @@
 from src.telos.services.Container import Container
-from src.telos.helpers.Response import response
 from .Controller import Controller
+
+from flask import jsonify
 
 import simplejson
 

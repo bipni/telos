@@ -7,7 +7,7 @@ from flask import Flask
 from flask_cors import CORS
 from waitress import serve
 
-class FLASK:
+class FlaskServer:
     def __init__(self, container: Container):
         self.container = container
         self.config = container.get('config')
@@ -24,7 +24,7 @@ class FLASK:
         serve(self.app, host=self.host, port=self.port)
 
 def run(container: Container):
-    flask = FLASK(container)
+    flask = FlaskServer(container)
     container.singleton('flask', flask)
 
     register_routes(container)
