@@ -53,7 +53,7 @@ class MongoRepository:
             '$set': data
         }
 
-        res = self._col.update_one(query)
+        res = self._col.update_one(query, values)
         return res
 
     def update_many(self, query: dict, data: dict):
@@ -63,5 +63,5 @@ class MongoRepository:
             '$set': data
         }
 
-        res = self._col.update_many(query)
+        res = self._col.update_many(query, values)
         return res.modified_count

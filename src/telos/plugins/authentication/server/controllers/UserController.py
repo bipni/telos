@@ -1,13 +1,13 @@
 from src.telos.services.Container import Container
-from src.telos.plugins.authentication.server.repositories.Registration import Registration
+from src.telos.plugins.authentication.server.repositories.User import User
 
 from flask import request, jsonify
 import hashlib
 
-class RegistrationController:
+class UserController:
     def __init__(self, container: Container):
         self.container = container
-        self.registrationRepo = self.container.get(Registration)
+        self.userRepo = self.container.get(User)
 
     def signup(self):
         mendatory_fields = ['name', 'email', 'username', 'password']
@@ -42,7 +42,7 @@ class RegistrationController:
                 error_message = "Password must be at least 6 characters in length"
             )), 400)
 
-        existing_user = self.registrationRepo.find_one({'username': username})
+        existing_user = self.userRepo.find_one({'username': username})
 
         if existing_user is not None:
             return (jsonify(dict(
@@ -54,12 +54,52 @@ class RegistrationController:
             name = name,
             email = email,
             username = username,
-            password = str(hashlib.sha1(bytes(password, 'utf-8')).hexdigest())
+            password = str(hashlib.sha1(bytes(password, 'utf-8')).hexdigest()),
+            locked = False,
+            attempts = 5
         )
 
-        res = self.registrationRepo.insert_one(new_user)
+        res = self.userRepo.insert_one(new_user)
 
         return (jsonify(dict(
             success = True,
             message = "Sign Up Successful"
+        )), 200)
+
+    def login(self):
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = self.userRepo.find_one({'username': username})
+
+        if user is None:
+            return (jsonify(dict(
+            success = False,
+            error_message = "Incorrect Username"
+        )), 401)
+
+        if user['locked']:
+            return (jsonify(dict(
+                success = False,
+                error_message = "Account is disabled"
+            )), 401)
+
+        hashed_password = str(hashlib.sha1(bytes(password, 'utf-8')).hexdigest())
+
+        if not user['password'] == hashed_password:
+            user['attempts'] = user['attempts'] - 1
+
+            if user['attempts'] == 0:
+                user['locked'] = True
+
+            self.userRepo.update_one({'username': username}, user)
+
+            return (jsonify(dict(
+            success = False,
+            error_message = "Incorrect Password"
+        )), 401)
+
+        return (jsonify(dict(
+            success = True,
+            message = "Login Successful"
         )), 200)

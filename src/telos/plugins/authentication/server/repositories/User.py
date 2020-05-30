@@ -1,7 +1,7 @@
 from src.telos.services.Container import Container
 from src.telos.repositories.MongoRepository import MongoRepository
 
-class Registration(MongoRepository):
+class User(MongoRepository):
 
     '''
     data model:
@@ -10,10 +10,13 @@ class Registration(MongoRepository):
             'email': email
             'username': username
             'password': password
+            'locked': account lock status
+            'attempts': max number of invalid attempts
+            'created_at' = creation time
         }
     '''
     def db(self):
         return 'authentication'
 
     def collection(self):
-        return 'authentication'
+        return 'user'
