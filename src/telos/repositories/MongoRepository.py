@@ -1,6 +1,8 @@
 from src.telos.services.Container import Container
 from src.telos.services.Mongo import Mongo
 
+import time
+
 class MongoRepository:
     def __init__(self, container: Container):
         self._container = container
@@ -19,15 +21,17 @@ class MongoRepository:
         return 'default'
 
     def insert_one(self, data: dict):
+        data['created_at'] = time.time()
         res = self._col.insert_one(data)
         return res.inserted_id
 
     def insert_many(self, data: list):
+        data['created_at'] = time.time()
         res = self._col.insert_many(data)
         return res.inserted_ids
 
-    def find_one(self):
-        res = self._col.find_one()
+    def find_one(self, query: dict):
+        res = self._col.find_one(query)
         return res
 
     def find_all(self, query: dict):
@@ -43,6 +47,8 @@ class MongoRepository:
         return res.deleted_count
 
     def update_one(self, query: dict, data: dict):
+        data['updated_at'] = time.time()
+
         values = {
             '$set': data
         }
@@ -51,6 +57,8 @@ class MongoRepository:
         return res
 
     def update_many(self, query: dict, data: dict):
+        data['updated_at'] = time.time()
+
         values = {
             '$set': data
         }
