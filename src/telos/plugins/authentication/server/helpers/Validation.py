@@ -40,3 +40,5 @@ class Validation:
     def PasswordValidation(self, password):
         if len(password) < 6:
             return "Password must be at least 6 characters in length"
+
+        return None
