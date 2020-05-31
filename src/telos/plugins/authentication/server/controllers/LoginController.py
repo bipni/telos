@@ -67,6 +67,25 @@ class LoginController:
             message = "Login Successful"
         )), 200)
 
+    def logout(self):
+        login_token = request.headers.get('login-token')
+
+        login_details = self.loginRepo.find_one({'token': login_token})
+
+        if login_details['expired']:
+            return (jsonify(dict(
+                success = True,
+                message = "Already Logout"
+            )), 200)
+
+        login_details['expired'] = True
+        self.loginRepo.update_one({'token': login_token}, login_details)
+
+        return (jsonify(dict(
+            success = True,
+            message = "Logout Successful"
+        )), 200)
+
     def get_login_token(self, user_id, remote_addr):
         token = uuid.uuid4().hex
 

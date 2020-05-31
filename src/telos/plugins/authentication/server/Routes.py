@@ -29,3 +29,4 @@ def register_routes(container: Container):
 
     server.register_routes(routes.base_path('/signup'), 'SignUp', user.signup, methods=['POST'])
     server.register_routes(routes.base_path('/login'), 'Login', login.login, methods=['POST'])
+    server.register_routes(routes.base_path('/logout'), 'Logout', login.logout, methods=['GET'])
