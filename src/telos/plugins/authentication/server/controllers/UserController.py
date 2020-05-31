@@ -1,5 +1,6 @@
 from src.telos.services.Container import Container
 from src.telos.plugins.authentication.server.repositories.User import User
+from src.telos.plugins.authentication.server.helpers.Validation import Validation
 
 from flask import request, jsonify
 import hashlib
@@ -8,6 +9,7 @@ class UserController:
     def __init__(self, container: Container):
         self.container = container
         self.userRepo = self.container.get(User)
+        self.validation = Validation(self.container)
 
     def signup(self):
         mendatory_fields = ['name', 'email', 'username', 'password']
@@ -24,31 +26,19 @@ class UserController:
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if not username.replace('_', '').isalnum():
+        err = self.validation.UsernameValidation(username)
+        if err is not None:
             return (jsonify(dict(
-                success = False,
-                error_message = "Username can only have alphanumeric characters and underscores"
-            )), 400)
+            success = False,
+            error_message = err
+        )), 400)
 
-        if len(username) < 4:
+        err = self.validation.PasswordValidation(password)
+        if err is not None:
             return (jsonify(dict(
-                success = False,
-                error_message = "Username must be at least 4 characters in length"
-            )), 400)
-
-        if len(password) < 6:
-            return (jsonify(dict(
-                success = False,
-                error_message = "Password must be at least 6 characters in length"
-            )), 400)
-
-        existing_user = self.userRepo.find_one({'username': username})
-
-        if existing_user is not None:
-            return (jsonify(dict(
-                success = False,
-                error_message = "Username is not available"
-            )), 400)
+            success = False,
+            error_message = err
+        )), 400)
 
         new_user = dict(
             name = name,
@@ -65,3 +55,50 @@ class UserController:
             success = True,
             message = "Sign Up Successful"
         )), 200)
+
+    def update_user(self):
+        login_token = request.headers.get('login-token')
+        user_id, err = self.validation.LoginValidation(login_token)
+
+        if err is not None:
+            return (jsonify(
+                status = False,
+                error_message = err
+            ), 401)
+
+        data = {}
+
+        updated_data = dict(request.form)
+
+        if 'name' in updated_data and not updated_data['name'] == '':
+            data['name'] = updated_data['name']
+
+        if 'email' in updated_data and not updated_data['email'] == '':
+            data['email'] = updated_data['email']
+
+        if 'username' in updated_data:
+            err = self.validation.UsernameValidation(updated_data['username'])
+            if err is not None:
+                return (jsonify(dict(
+                    success = False,
+                    error_message = err
+                )), 400)
+
+            data['username'] = updated_data['username']
+
+        if 'password' in updated_data:
+            err = self.validation.PasswordValidation(updated_data['password'])
+            if err is not None:
+                return (jsonify(dict(
+                    success = False,
+                    error_message = err
+                )), 400)
+
+            data['password'] = str(hashlib.sha1(bytes(updated_data['password'], 'utf-8')).hexdigest())
+
+        self.userRepo.update_one({'_id': user_id}, data)
+
+        return (jsonify(
+            status = True,
+            message = "User Updated Successfully"
+        ), 200)

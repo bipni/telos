@@ -86,6 +86,10 @@ class LoginController:
             message = "Logout Successful"
         )), 200)
 
+    def validate_login(self, login_token):
+        login_details = self.loginRepo.find_one({'token': login_token})
+        print(login_details)
+
     def get_login_token(self, user_id, remote_addr):
         token = uuid.uuid4().hex
 
