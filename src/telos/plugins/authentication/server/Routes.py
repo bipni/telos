@@ -1,5 +1,6 @@
 from src.telos.services.Container import Container
 from src.telos.plugins.authentication.server.controllers.UserController import UserController
+from src.telos.plugins.authentication.server.controllers.LoginController import LoginController
 
 from flask import jsonify
 
@@ -20,10 +21,11 @@ def register_routes(container: Container):
     server = container.get('flask')
     routes = Routes(container)
     user = UserController(container)
+    login = LoginController(container)
 
     print("Registering Authentication Routes")
 
     server.register_routes(routes.base_path(''), 'Authentication', routes.authentication)
 
     server.register_routes(routes.base_path('/signup'), 'SignUp', user.signup, methods=['POST'])
-    server.register_routes(routes.base_path('/login'), 'Login', user.login, methods=['POST'])
+    server.register_routes(routes.base_path('/login'), 'Login', login.login, methods=['POST'])
