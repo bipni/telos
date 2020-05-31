@@ -26,7 +26,9 @@ class MongoRepository:
         return res.inserted_id
 
     def insert_many(self, data: list):
-        data['created_at'] = time.time()
+        for datum in data:
+            datum['created_at'] = time.time()
+
         res = self._col.insert_many(data)
         return res.inserted_ids
 
