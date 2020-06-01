@@ -3,6 +3,7 @@ from src.telos.plugins.authentication.server.repositories.User import User
 from src.telos.plugins.authentication.server.repositories.Login import Login
 
 from flask import request, jsonify
+from bson import ObjectId
 import hashlib
 import uuid
 import time
@@ -86,11 +87,7 @@ class LoginController:
             message = "Logout Successful"
         )), 200)
 
-    def validate_login(self, login_token):
-        login_details = self.loginRepo.find_one({'token': login_token})
-        print(login_details)
-
-    def get_login_token(self, user_id, remote_addr):
+    def get_login_token(self, user_id: ObjectId, remote_addr: str):
         token = uuid.uuid4().hex
 
         login_info = dict(
