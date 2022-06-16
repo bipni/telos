@@ -7,3 +7,4 @@
 # folders
 ENV
 .vscode
+/stock/test.py
