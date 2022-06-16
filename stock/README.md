@@ -19,7 +19,7 @@ This will give you, your PC IP address.
 
 What if you don't want to import `MyIP` in your code, but want to run the `MyIP`, then just run -
 ```bash
-$ telos myip
+$ telos myIP        # telos <filename>
 $ 192.168.x.x
 ```
 
