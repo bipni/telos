@@ -1,4 +1,4 @@
-from stock.myip import MyIP
+from stock.myIP import MyIP
 
 import socket
 import multiprocessing
