@@ -1,9 +1,9 @@
 import Demo from './plugins/demo/demo';
-import Authentication from './plugins/authentication/authentication';
+import Entry from './plugins/authentication/entry';
 
 function App() {
   return (
-    <Authentication />
+    <Entry />
   );
 }
 
