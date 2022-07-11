@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/home";
 import Login from "./components/login";
+import NoPage from "./components/nopage";
 import Registration from "./components/registration";
 
 function Entry() {
@@ -14,7 +15,7 @@ function Entry() {
           <Route index element={<Home />} />
           <Route path="signin" element={<Login />} />
           <Route path="registration" element={<Registration />} />
-          {/* <Route path="*" element={<NoPage />} /> */}
+          <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
