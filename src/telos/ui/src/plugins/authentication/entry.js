@@ -1,14 +1,11 @@
 import React from "react";
 import Home from "./components/home";
 
-class Entry extends React.Component {
-
-    render() {
+function Entry() {
         
-        return (
-            <Home />
-        );
-    }
+    return (
+        <Home />
+    );
 }
 
 export default Entry;

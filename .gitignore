@@ -3,8 +3,8 @@
 *.pyo
 *.egg-info
 .env
+/stock/test.py
 
 # folders
 ENV
 .vscode
-/stock/test.py

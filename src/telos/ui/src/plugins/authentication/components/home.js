@@ -3,16 +3,14 @@ import Login from "./login";
 import Registration from "./registration";
 
 
-class Home extends React.Component {
+function Home () {
 
-    render() {
-        return (
-            <div>
-                <Login />
-                {/* <Registration /> */}
-            </div>
-        );
-    }
+    return (
+        <div>
+            <Login />
+            {/* <Registration /> */}
+        </div>
+    );
 }
 
 export default Home;
