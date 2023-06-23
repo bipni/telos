@@ -7,6 +7,7 @@ from src.telos.providers.MongoProvider import MongoProvider
 import importlib
 import threading
 
+
 def run():
     container = Container()
 

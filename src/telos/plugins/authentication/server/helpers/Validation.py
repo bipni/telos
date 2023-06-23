@@ -5,6 +5,7 @@ from src.telos.plugins.authentication.server.repositories.User import User
 from flask import jsonify
 import time
 
+
 class Validation:
     def __init__(self, container: Container):
         self.container = container

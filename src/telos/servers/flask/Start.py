@@ -7,6 +7,7 @@ from flask import Flask
 from flask_cors import CORS
 from waitress import serve
 
+
 class FlaskServer:
     def __init__(self, container: Container):
         self.container = container
@@ -15,13 +16,14 @@ class FlaskServer:
         self.host = self.config['flask']['host']
         self.port = int(self.config['flask']['port'])
         CORS(self.app)
-    
+
     def register_routes(self, endpoint: str, name: str, handler: Callable, methods: list = ['POST', 'GET']):
-        self.app.add_url_rule(endpoint, name, handler, methods = methods)
-    
+        self.app.add_url_rule(endpoint, name, handler, methods=methods)
+
     def start(self):
         print("Flask Server ", end='')
         serve(self.app, host=self.host, port=self.port)
+
 
 def run(container: Container):
     flask_server = FlaskServer(container)

@@ -5,6 +5,7 @@ from src.telos.plugins.authentication.server.helpers.Validation import Validatio
 from flask import request, jsonify
 import hashlib
 
+
 class UserController:
     def __init__(self, container: Container):
         self.container = container
@@ -17,8 +18,8 @@ class UserController:
         for mendatory_field in mendatory_fields:
             if request.form.get(mendatory_field) is None:
                 return (jsonify(dict(
-                    success = False,
-                    error_message = "Mendatory Field %s Missing" % mendatory_field
+                    success=False,
+                    error_message="Mendatory Field %s Missing" % mendatory_field
                 )), 404)
 
         name = request.form.get('name')
@@ -29,31 +30,31 @@ class UserController:
         err = self.validation.UsernameValidation(username)
         if err is not None:
             return (jsonify(dict(
-            success = False,
-            error_message = err
-        )), 400)
+                success=False,
+                error_message=err
+            )), 400)
 
         err = self.validation.PasswordValidation(password)
         if err is not None:
             return (jsonify(dict(
-            success = False,
-            error_message = err
-        )), 400)
+                success=False,
+                error_message=err
+            )), 400)
 
         new_user = dict(
-            name = name,
-            email = email,
-            username = username,
-            password = str(hashlib.sha1(bytes(password, 'utf-8')).hexdigest()),
-            locked = False,
-            attempts = 5
+            name=name,
+            email=email,
+            username=username,
+            password=str(hashlib.sha1(bytes(password, 'utf-8')).hexdigest()),
+            locked=False,
+            attempts=5
         )
 
         res = self.userRepo.insert_one(new_user)
 
         return (jsonify(dict(
-            success = True,
-            message = "Sign Up Successful"
+            success=True,
+            message="Sign Up Successful"
         )), 200)
 
     def update_user(self):
@@ -62,8 +63,8 @@ class UserController:
 
         if err is not None:
             return (jsonify(
-                status = False,
-                error_message = err
+                status=False,
+                error_message=err
             ), 401)
 
         data = {}
@@ -80,8 +81,8 @@ class UserController:
             err = self.validation.UsernameValidation(updated_data['username'])
             if err is not None:
                 return (jsonify(dict(
-                    success = False,
-                    error_message = err
+                    success=False,
+                    error_message=err
                 )), 400)
 
             data['username'] = updated_data['username']
@@ -90,15 +91,16 @@ class UserController:
             err = self.validation.PasswordValidation(updated_data['password'])
             if err is not None:
                 return (jsonify(dict(
-                    success = False,
-                    error_message = err
+                    success=False,
+                    error_message=err
                 )), 400)
 
-            data['password'] = str(hashlib.sha1(bytes(updated_data['password'], 'utf-8')).hexdigest())
+            data['password'] = str(hashlib.sha1(
+                bytes(updated_data['password'], 'utf-8')).hexdigest())
 
         self.userRepo.update_one({'_id': user_id}, data)
 
         return (jsonify(
-            status = True,
-            message = "User Updated Successfully"
+            status=True,
+            message="User Updated Successfully"
         ), 200)

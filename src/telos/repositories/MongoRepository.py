@@ -3,6 +3,7 @@ from src.telos.services.Mongo import Mongo
 
 import time
 
+
 class MongoRepository:
     def __init__(self, container: Container):
         self._container = container

@@ -1,6 +1,7 @@
 from src.telos.services.Container import Container
 from src.telos.repositories.MongoRepository import MongoRepository
 
+
 class Login(MongoRepository):
 
     '''
@@ -14,6 +15,7 @@ class Login(MongoRepository):
             'expired_at' = expiration time
         }
     '''
+
     def db(self):
         return 'authentication'
 

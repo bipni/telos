@@ -2,6 +2,7 @@ from src.telos.services.Container import Container
 
 import importlib
 
+
 def register_plugins(container: Container):
     server = container.get('flask')
     config = container.get('config')
@@ -27,4 +28,3 @@ def register_plugins(container: Container):
             mod.register_routes(container)
         else:
             print(f"register_routes method not defined in package {package}")
-

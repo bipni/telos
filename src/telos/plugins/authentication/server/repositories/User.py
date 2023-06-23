@@ -1,6 +1,7 @@
 from src.telos.services.Container import Container
 from src.telos.repositories.MongoRepository import MongoRepository
 
+
 class User(MongoRepository):
 
     '''
@@ -15,6 +16,7 @@ class User(MongoRepository):
             'created_at' = creation time
         }
     '''
+
     def db(self):
         return 'authentication'
 
